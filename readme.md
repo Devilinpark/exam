@@ -267,7 +267,7 @@ void loop()
 }
 
 ```
-# 6 program
+# 6 & 8 program
 ```ruby
 def web_page():
     if relay.value() == 1:
