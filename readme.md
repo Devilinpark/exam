@@ -1,5 +1,5 @@
 # 1 program
-<h6>```ruby
+```ruby
 # 1. Read your name and print Hello message with name
 name = input("Enter your name: ")
 print("Hello, " + name + "!")
@@ -88,7 +88,7 @@ for _ in range(10):
     print("Current Time:", current_time)
     time.sleep(10)
 
-```<h6>
+```
 # 2 program
 ```ruby
 from machine import Pin
