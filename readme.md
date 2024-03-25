@@ -109,3 +109,29 @@ for _ in range(10):
     time.sleep(10)
 
 ```
+# 2 program
+```yard
+from machine import Pin
+import time
+
+# Define LED pins and button pins
+led1 = Pin(18, Pin.OUT)  # External LED
+led0 = Pin(2, Pin.OUT)   # Default LED
+button1 = Pin(35, Pin.IN)  # Switch for external LED1 (connected to IO35)
+button0 = Pin(0, Pin.IN)   # Switch for default LED0 (BOOT button)
+
+while True:  # Infinite loop for continuous operation
+    if button1.value():  # If the external LED button is pressed
+        led1.value(1)     # Turn on external LED
+    else:
+        led1.value(0)     # Turn off external LED if button not pressed
+
+    if not button0.value():  # If the default LED button (BOOT button) is pressed
+        led0.value(1)        # Turn on default LED
+    else:
+        led0.value(0)        # Turn off default LED if button not pressed
+
+    time.sleep(0.1)  # Add a small delay to avoid continuous checking and reduce CPU load
+
+
+```
