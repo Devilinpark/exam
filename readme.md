@@ -90,7 +90,7 @@ for _ in range(10):
 
 ```
 # 2 program
-```yard
+```ruby
 from machine import Pin
 import time
 
@@ -122,7 +122,7 @@ while True:
 #a. Default button (35) – external LED ‘ON’ b. BOOT button – internal LED ‘ON
 ```
 # 3 program
-```yard
+```ruby
 from machine import Pin
 from time import sleep
 led = Pin(18, Pin.OUT)
@@ -153,7 +153,7 @@ else:
 ```
 # 4 program
 
-```yard
+```ruby
 from machine import Pin
 from time import sleep
 relay = Pin(13, Pin.OUT)
@@ -173,7 +173,7 @@ while True:
 #2. Upload Prog.py file
 ```
 # 5 program
-```yard
+```ruby
 #include <WebServer.h>
 #include <WiFi.h>
 #include <esp32cam.h>
@@ -268,7 +268,7 @@ void loop()
 
 ```
 # 6 program
-```yard
+```ruby
 def web_page():
     if relay.value() == 1:
         relay_state = ''
@@ -391,7 +391,7 @@ while True:
 #4. IP address displayed
 ```
 # 7 program
-```yard
+```ruby
 import umail
 import network
 from machine import Pin
@@ -455,7 +455,7 @@ while True:
 #2. Upload Umail.py and Prog.py file (your code)
 ```
 # 9 program
-```yard
+```ruby
 from machine import Pin, ADC
 from time import sleep
 
