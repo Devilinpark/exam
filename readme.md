@@ -392,58 +392,70 @@ while True:
 ```
 # 7 program
 ```ruby
+
 import umail
 import network
 from machine import Pin
 from time import sleep
-
 motion = False
+
+# Your network credentials
 ssid = 'JSSATEB'
 password = None
+
+# Email details
 sender_email = 'iot22mcal37@gmail.com'
-sender_name = 'iotlab'  # sender name
+sender_name = 'iotlab' #sender name
 sender_app_password = 'mrub pmhi dtdj xozy'
-recipient_email = 'Enter Your/any Email Address'
-email_subject = 'intruder system'
+recipient_email ='Enter Your/any Email Address'
+email_subject ='intruder system'
 
 def handle_interrupt(pin):
-    global motion
-    motion = True
-    global interrupt_pin
-    interrupt_pin = pin
-    buzzer = Pin(14, Pin.OUT)
-    pir = Pin(0, Pin.IN)  # boot (push) button
-    pir.irq(trigger=Pin.IRQ_FALLING, handler=handle_interrupt)
+  global motion
+  motion = True
+  global interrupt_pin
+  interrupt_pin = pin 
+
+buzzer = Pin(14, Pin.OUT)
+pir = Pin(0, Pin.IN)        #boot (push) button
+# GPIO 26 used as Interrupting source (Rising edge 0->1)
+
+pir.irq(trigger=Pin.IRQ_FALLING, handler=handle_interrupt)
+
 
 def connect_wifi(ssid, password):
-    station = network.WLAN(network.STA_IF)
-    station.active(True)
-    station.connect(ssid, password)
-    while station.isconnected() == False:
-        pass
-    print('Connection successful')
-    print(station.ifconfig())
-
+  #Connect to your network
+  station = network.WLAN(network.STA_IF)
+  station.active(True)
+  station.connect(ssid, password)
+  while station.isconnected() == False:
+    pass
+  print('Connection successful')
+  print(station.ifconfig())
+    
+# Connect to your network
 connect_wifi(ssid, password)
-
 while True:
-    print(pir.value())
-    sleep(1.0)
-    if motion:
-        print('Motion detected! Interrupt caused by:', interrupt_pin)
-        buzzer.value(1)
-        sleep(1)
-        buzzer.value(0)
-        print('Motion stopped!')
-        motion = False
-        smtp = umail.SMTP('smtp.gmail.com', 465, ssl=True)  # Gmail's SSL port
-        smtp.login(sender_email, sender_app_password)
-        smtp.to(recipient_email)
-        smtp.write("From:" + sender_name + "<"+ sender_email+">\n")
-        smtp.write("Subject:" + email_subject + "\n")
-        smtp.write("Message from ESP32- Motion detected! ")
-        smtp.send()
-        smtp.quit()
+  print(pir.value())
+  sleep(1.0)
+   
+  if motion:
+    print('Motion detected! Interrupt caused by:', interrupt_pin)
+    buzzer.value(1)
+    sleep(1)
+    buzzer.value(0)
+    print('Motion stopped!')
+    motion = False
+    # Send the email
+    smtp = umail.SMTP('smtp.gmail.com', 465, ssl=True) # Gmail's SSL port
+    smtp.login(sender_email, sender_app_password)
+    smtp.to(recipient_email)
+    smtp.write("From:" + sender_name + "<"+ sender_email+">\n")
+    smtp.write("Subject:" + email_subject + "\n")
+    smtp.write("Message from ESP32- Motion detected! ")
+    smtp.send()
+    smtp.quit()
+
 
 #Connection steps:
 #1. (ESP32) GND – GND (PIR)
