@@ -88,6 +88,25 @@ for _ in range(10):
     print("Current Time:", current_time)
     time.sleep(10)
 
+#1.8
+# Read a file path from the user
+file_path = input("Enter the file path: ")
+try:
+ # Open the file and read it line by line
+ with open(file_path, 'r') as file:
+ for line_num, line in enumerate(file, start=1):
+ # Split the line into words and calculate word count
+ words = line.split()
+ word_count = len(words)
+ 
+ # Print the word count for each line
+ print(f"Line {line_num}: Word Count = {word_count}")
+except FileNotFoundError:
+ print("File not found.")
+except Exception as e:
+ print(f"An error occurred: {e}")
+
+
 ```
 # 2 program
 ```ruby
